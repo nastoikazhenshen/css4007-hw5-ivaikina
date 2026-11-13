@@ -1,0 +1,42 @@
+{
+  "scenario": "S08",
+  "provider": "OpenAI",
+  "model": "gpt-4.1-mini",
+  "status_profile": "status_unavailable",
+  "user_id": "demo-user-a",
+  "thread_id": "s08",
+  "results": [
+    {
+      "user_message": "Check whether Wi-Fi is down. If it is operating, prepare a ticket. I already enabled Wi-Fi and reconnected, with no success.",
+      "trace": [
+        {
+          "node": "model",
+          "type": "AIMessage",
+          "content": "",
+          "tool_calls": [
+            {
+              "name": "check_service_status",
+              "args": {
+                "service": "wifi"
+              }
+            }
+          ]
+        },
+        {
+          "node": "tools",
+          "type": "ToolMessage",
+          "content": "{\"service\": \"wifi\", \"status\": \"unknown\", \"message\": \"The demo Wi-Fi status source is unavailable.\", \"profile\": \"status_unavailable\", \"source\": \"data/service_status.json\"}",
+          "tool_name": "check_service_status"
+        },
+        {
+          "node": "model",
+          "type": "AIMessage",
+          "content": "The Wi-Fi service status could not be verified at this time. Would you like me to prepare a ticket draft describing that the Wi-Fi status is currently unavailable?",
+          "tool_calls": []
+        }
+      ],
+      "final_answer": "The Wi-Fi service status could not be verified at this time. Would you like me to prepare a ticket draft describing that the Wi-Fi status is currently unavailable?",
+      "loop_limit_reached": false
+    }
+  ]
+}

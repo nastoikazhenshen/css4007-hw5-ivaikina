@@ -1,0 +1,42 @@
+{
+  "scenario": "S07",
+  "provider": "OpenAI",
+  "model": "gpt-4.1-mini",
+  "status_profile": "wifi_outage",
+  "user_id": "demo-user-a",
+  "thread_id": "s07",
+  "results": [
+    {
+      "user_message": "I enabled Wi-Fi and forgot the saved network, but Campus-Demo still will not connect. Check whether Wi-Fi is down. If it is operating, prepare a ticket about this problem.",
+      "trace": [
+        {
+          "node": "model",
+          "type": "AIMessage",
+          "content": "",
+          "tool_calls": [
+            {
+              "name": "check_service_status",
+              "args": {
+                "service": "wifi"
+              }
+            }
+          ]
+        },
+        {
+          "node": "tools",
+          "type": "ToolMessage",
+          "content": "{\"service\": \"wifi\", \"status\": \"outage\", \"message\": \"The demo Wi-Fi service is unavailable across campus. The fixture gives no repair time.\", \"profile\": \"wifi_outage\", \"source\": \"data/service_status.json\"}",
+          "tool_name": "check_service_status"
+        },
+        {
+          "node": "model",
+          "type": "AIMessage",
+          "content": "The Wi-Fi service is currently experiencing an outage across campus. Because of this, I will not prepare a ticket at this time. Is there anything else I can assist you with?",
+          "tool_calls": []
+        }
+      ],
+      "final_answer": "The Wi-Fi service is currently experiencing an outage across campus. Because of this, I will not prepare a ticket at this time. Is there anything else I can assist you with?",
+      "loop_limit_reached": false
+    }
+  ]
+}

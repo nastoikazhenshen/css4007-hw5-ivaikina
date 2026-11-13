@@ -1,0 +1,42 @@
+{
+  "scenario": "S14",
+  "provider": "OpenAI",
+  "model": "gpt-4.1-mini",
+  "status_profile": "recovery_outage",
+  "user_id": "demo-user-a",
+  "thread_id": "s14",
+  "results": [
+    {
+      "user_message": "My password recovery page is unavailable. Check the service status. Is there a known problem?",
+      "trace": [
+        {
+          "node": "model",
+          "type": "AIMessage",
+          "content": "",
+          "tool_calls": [
+            {
+              "name": "check_service_status",
+              "args": {
+                "service": "account_recovery"
+              }
+            }
+          ]
+        },
+        {
+          "node": "tools",
+          "type": "ToolMessage",
+          "content": "{\"service\": \"account_recovery\", \"status\": \"outage\", \"message\": \"The demo account-recovery service is unavailable. The fixture gives no repair time.\", \"profile\": \"recovery_outage\", \"source\": \"data/service_status.json\"}",
+          "tool_name": "check_service_status"
+        },
+        {
+          "node": "model",
+          "type": "AIMessage",
+          "content": "The password recovery service is currently experiencing an outage and is unavailable. There is no estimated repair time provided at the moment. If you want, I can help you prepare a ticket draft describing this issue. Would you like me to do that?",
+          "tool_calls": []
+        }
+      ],
+      "final_answer": "The password recovery service is currently experiencing an outage and is unavailable. There is no estimated repair time provided at the moment. If you want, I can help you prepare a ticket draft describing this issue. Would you like me to do that?",
+      "loop_limit_reached": false
+    }
+  ]
+}

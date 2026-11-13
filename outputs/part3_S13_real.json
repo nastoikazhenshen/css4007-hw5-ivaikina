@@ -1,0 +1,106 @@
+{
+  "scenario": "S13",
+  "mode": "real",
+  "events": [
+    {
+      "action": "message",
+      "command": "/Users/georgeshlykov/PycharmProjects/css4007-hw5-ivaikina/.venv/bin/python /Users/georgeshlykov/PycharmProjects/css4007-hw5-ivaikina/part3.py chat --mode real --storage local-storage/part3-scenarios/S13 --user-id demo-user-a --thread-id isolation-a --profile normal --message Please remember that I prefer replies in Kazakh. I have a Wi-Fi problem.",
+      "message": "Please remember that I prefer replies in Kazakh. I have a Wi-Fi problem.",
+      "result": {
+        "user_id": "demo-user-a",
+        "thread_id": "isolation-a",
+        "profile": "normal",
+        "mode": "real",
+        "process_id": 36116,
+        "trace": [
+          {
+            "node": "capture",
+            "updates": {
+              "preference": "Kazakh",
+              "problem": "Please remember that I prefer replies in Kazakh. I have a Wi-Fi problem.",
+              "steps_tried": [],
+              "tool_rounds": 0,
+              "memory_source": {
+                "user_preference": "current_message",
+                "conversation": "current_message",
+                "reference": "data/helpdesk.json (via find_instructions)"
+              }
+            }
+          },
+          {
+            "node": "model",
+            "updates": {
+              "messages": [
+                {
+                  "type": "AIMessage",
+                  "content": "Wi-Fi мәселеңізді шешуге көмектесуге дайынмын. Қандай қиындықтар туындап жатыр? Мысалы, қосыла алмай жатырсыз ба, әлде сигнал әлсіз бе? Толығырақ айтып берсеңіз, жақсы болар еді.",
+                  "tool_calls": []
+                }
+              ],
+              "tool_rounds": 0
+            }
+          }
+        ],
+        "saved_preference": "Kazakh",
+        "saved_problem": "Please remember that I prefer replies in Kazakh. I have a Wi-Fi problem.",
+        "saved_steps": [],
+        "memory_source": {
+          "user_preference": "current_message",
+          "conversation": "current_message",
+          "reference": "data/helpdesk.json (via find_instructions)"
+        },
+        "reply": "Wi-Fi мәселеңізді шешуге көмектесуге дайынмын. Қандай қиындықтар туындап жатыр? Мысалы, қосыла алмай жатырсыз ба, әлде сигнал әлсіз бе? Толығырақ айтып берсеңіз, жақсы болар еді."
+      }
+    },
+    {
+      "action": "message",
+      "command": "/Users/georgeshlykov/PycharmProjects/css4007-hw5-ivaikina/.venv/bin/python /Users/georgeshlykov/PycharmProjects/css4007-hw5-ivaikina/part3.py chat --mode real --storage local-storage/part3-scenarios/S13 --user-id demo-user-b --thread-id isolation-b --profile normal --message Have I told you a preferred language or a previous problem?",
+      "message": "Have I told you a preferred language or a previous problem?",
+      "result": {
+        "user_id": "demo-user-b",
+        "thread_id": "isolation-b",
+        "profile": "normal",
+        "mode": "real",
+        "process_id": 36119,
+        "trace": [
+          {
+            "node": "capture",
+            "updates": {
+              "preference": null,
+              "problem": "",
+              "steps_tried": [],
+              "tool_rounds": 0,
+              "memory_source": {
+                "user_preference": "none",
+                "conversation": "none",
+                "reference": "data/helpdesk.json (via find_instructions)"
+              }
+            }
+          },
+          {
+            "node": "model",
+            "updates": {
+              "messages": [
+                {
+                  "type": "AIMessage",
+                  "content": "No, you have not told me a preferred language or mentioned a previous problem in this conversation. How can I assist you today?",
+                  "tool_calls": []
+                }
+              ],
+              "tool_rounds": 0
+            }
+          }
+        ],
+        "saved_preference": null,
+        "saved_problem": "",
+        "saved_steps": [],
+        "memory_source": {
+          "user_preference": "none",
+          "conversation": "none",
+          "reference": "data/helpdesk.json (via find_instructions)"
+        },
+        "reply": "No, you have not told me a preferred language or mentioned a previous problem in this conversation. How can I assist you today?"
+      }
+    }
+  ]
+}

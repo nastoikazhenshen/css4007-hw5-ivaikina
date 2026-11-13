@@ -161,3 +161,84 @@ Push your finished work to your public fork and submit its link on the LMS. The 
 - [LangGraph memory](https://docs.langchain.com/oss/python/langgraph/add-memory)
 
 
+
+---
+
+## Student implementation — run this fork
+
+The starter assignment above is retained unchanged. This section documents the implemented application and its exact run commands.
+
+**Environment:** Python 3.12.16; see \`requirements.txt\` for pinned versions.
+
+### Install
+
+From the repository root, on macOS/Linux:
+
+\`\`\`bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+\`\`\`
+
+On Windows, use \`py -3.12 -m venv .venv\`, activate with \`.venv\Scripts\activate\`, and install with \`python -m pip install -r requirements.txt\`.
+
+For the real model demonstrations, copy \`.env.example\` to \`.env\` (for example, \`cp .env.example .env\`) and set \`OPENAI_API_KEY\` to a **private, newly generated** key and \`MODEL_NAME=gpt-4.1-mini\` (or another available tool-capable OpenAI model). \`.env\` is ignored by Git. **Part 1, direct tools and the automated tests do not need a model API key.** The status snapshots and accounts are fictional.
+
+### Part 1: deterministic graph (no LLM)
+
+\`\`\`bash
+python part1.py
+python part1.py > outputs/part1_clarification_trace.txt
+\`\`\`
+
+The current \`part1.py\` is the modified graph with \`clarify_problem\`. Its original pre-change trace is retained in \`outputs/part1_original_trace.txt\`; see the comparison in \`SUBMISSION.md\`. Both prints include node paths and state updates.
+
+### Part 2: model and tools
+
+\`\`\`bash
+python part2.py --direct
+python part2.py --scenario S06
+python part2.py --scenario S07
+python part2.py --scenario S08
+python part2.py --scenario S09
+python part2.py --scenario S14
+\`\`\`
+
+The first command runs the three reusable Python functions directly. The scenario commands call the **real** OpenAI model and produce \`outputs/part2_SXX.json\` containing the node/tool trace and final answers. Ticket drafts are saved to \`local-storage/tickets/DRAFT-*.json\`; nothing is sent.
+
+### Part 3: persistent memory
+
+\`\`\`bash
+python part3.py scenario --id S10 --mode real
+python part3.py scenario --id S11 --mode real
+python part3.py scenario --id S12 --mode real
+python part3.py scenario --id S13 --mode real
+\`\`\`
+
+The runner uses the supplied \`data/scenarios.json\`, resets storage before each independent scenario, and starts **each message in a separate Python process** to verify disk persistence. It writes \`outputs/part3_SXX_real.json\`.
+
+Use \`--mode fake\` instead of \`--mode real\` for a clearly labelled, deterministic test substitute that needs no API key. To send a manual message in a chosen conversation:
+
+\`\`\`bash
+python part3.py chat --mode real --user-id demo-user-a --thread-id my-thread --message "I cannot connect to Wi-Fi."
+\`\`\`
+
+Repeat the command with the same user and thread to resume the conversation.
+
+### Memory storage and reset
+
+- \`local-storage/part3-scenarios/SXX/conversations.sqlite\`: LangGraph SQLite checkpoints for a scenario.
+- \`local-storage/part3-scenarios/SXX/preferences.sqlite\`: persistent language preferences keyed by \`user_id\`.
+- \`local-storage/part3/\`: default persistent storage for manual \`part3.py chat\` calls.
+- \`local-storage/tickets/\`: local ticket drafts from Part 2.
+- \`outputs/\`: execution traces intended for submission (do not store secrets here).
+
+To reset one scenario's memory, stop any running program and remove only its directory, e.g. \`rm -rf local-storage/part3-scenarios/S11\` on macOS/Linux. To reset all local state, delete the \`local-storage/\` directory **after backing up any drafts you want to keep**. Database and secret files are Git-ignored.
+
+### Automated tests and CI
+
+\`\`\`bash
+python -m pytest -v
+\`\`\`
+
+\`tests/test_helpdesk.py\` covers graph routing, the three direct tools, ticket validation, restart persistence and separation of users/threads. Tests use a labelled **fake** planner for memory and do **not** call OpenAI. \`.github/workflows/tests.yml\` runs the same tests on every push to \`main\`, on pull requests and on manual workflow dispatch. See \`SUBMISSION.md\` for actual scenario outcomes and limitations.

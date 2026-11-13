@@ -1,0 +1,65 @@
+
+============================================================
+USER MESSAGE: I cannot connect to Wi-Fi.
+
+NODE: read_request
+UPDATE: {'category': 'wifi'}
+STATE AFTER NODE: {'message': 'I cannot connect to Wi-Fi.', 'category': 'wifi'}
+
+NODE: wifi_help
+UPDATE: {'reply': 'Check that Wi-Fi is enabled and airplane mode is off.\nSelect the fictional Campus-Demo network.\nIf connection fails, forget the saved network and try connecting again.\nIf the problem remains, check the service status before preparing a ticket.'}
+STATE AFTER NODE: {'message': 'I cannot connect to Wi-Fi.', 'category': 'wifi', 'reply': 'Check that Wi-Fi is enabled and airplane mode is off.\nSelect the fictional Campus-Demo network.\nIf connection fails, forget the saved network and try connecting again.\nIf the problem remains, check the service status before preparing a ticket.'}
+
+EXECUTION PATH: read_request -> wifi_help
+FINAL REPLY: Check that Wi-Fi is enabled and airplane mode is off.
+Select the fictional Campus-Demo network.
+If connection fails, forget the saved network and try connecting again.
+If the problem remains, check the service status before preparing a ticket.
+
+============================================================
+USER MESSAGE: I forgot my PASSWORD.
+
+NODE: read_request
+UPDATE: {'category': 'password'}
+STATE AFTER NODE: {'message': 'I forgot my PASSWORD.', 'category': 'password'}
+
+NODE: password_help
+UPDATE: {'reply': 'Open the practice sign-in screen and choose Forgot password.\nFollow the recovery instructions shown by the practice application.\nIf recovery is unavailable, prepare a ticket describing the error.\nNever include a password or recovery code in a ticket.'}
+STATE AFTER NODE: {'message': 'I forgot my PASSWORD.', 'category': 'password', 'reply': 'Open the practice sign-in screen and choose Forgot password.\nFollow the recovery instructions shown by the practice application.\nIf recovery is unavailable, prepare a ticket describing the error.\nNever include a password or recovery code in a ticket.'}
+
+EXECUTION PATH: read_request -> password_help
+FINAL REPLY: Open the practice sign-in screen and choose Forgot password.
+Follow the recovery instructions shown by the practice application.
+If recovery is unavailable, prepare a ticket describing the error.
+Never include a password or recovery code in a ticket.
+
+============================================================
+USER MESSAGE: My laptop screen is broken.
+
+NODE: read_request
+UPDATE: {'category': 'other'}
+STATE AFTER NODE: {'message': 'My laptop screen is broken.', 'category': 'other'}
+
+NODE: other_help
+UPDATE: {'reply': 'Is your problem related to Wi-Fi or a password?'}
+STATE AFTER NODE: {'message': 'My laptop screen is broken.', 'category': 'other', 'reply': 'Is your problem related to Wi-Fi or a password?'}
+
+EXECUTION PATH: read_request -> other_help
+FINAL REPLY: Is your problem related to Wi-Fi or a password?
+
+============================================================
+USER MESSAGE: My Wi-Fi password does not work.
+
+NODE: read_request
+UPDATE: {'category': 'wifi'}
+STATE AFTER NODE: {'message': 'My Wi-Fi password does not work.', 'category': 'wifi'}
+
+NODE: wifi_help
+UPDATE: {'reply': 'Check that Wi-Fi is enabled and airplane mode is off.\nSelect the fictional Campus-Demo network.\nIf connection fails, forget the saved network and try connecting again.\nIf the problem remains, check the service status before preparing a ticket.'}
+STATE AFTER NODE: {'message': 'My Wi-Fi password does not work.', 'category': 'wifi', 'reply': 'Check that Wi-Fi is enabled and airplane mode is off.\nSelect the fictional Campus-Demo network.\nIf connection fails, forget the saved network and try connecting again.\nIf the problem remains, check the service status before preparing a ticket.'}
+
+EXECUTION PATH: read_request -> wifi_help
+FINAL REPLY: Check that Wi-Fi is enabled and airplane mode is off.
+Select the fictional Campus-Demo network.
+If connection fails, forget the saved network and try connecting again.
+If the problem remains, check the service status before preparing a ticket.

@@ -10,10 +10,12 @@ TODO: draw the first graph and explain what each node reads and changes. Answer 
 
 | Message | Predicted route | Actual route | What I learned |
 | --- | --- | --- | --- |
-| I cannot connect to Wi-Fi. | | | |
-| I forgot my PASSWORD. | | | |
-| My laptop screen is broken. | | | |
-| My Wi-Fi password does not work. | | | |
+| I cannot connect to Wi-Fi. | read_request → wifi_help | read_request → wifi_help | The graph detects "Wi-Fi" and retrieves the Wi-Fi instructions from helpdesk.json. |
+| I forgot my PASSWORD. | read_request → password_help | read_request → password_help | Routing is case-insensitive because the message is converted to lowercase. |
+| My laptop screen is broken. | read_request → other_help | read_request → other_help | Unsupported requests are routed to other_help, which asks for clarification. |
+| My Wi-Fi password does not work. | read_request → wifi_help | read_request → wifi_help | When both keywords are present, Wi-Fi takes priority because its condition is checked first. |
+
+All four predicted routes matched the actual execution traces. Each node returned a partial state update, while the graph preserved the existing fields and merged the updates into the current state.
 
 ### My change to the graph
 
